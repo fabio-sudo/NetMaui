@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCursoProgramacao.Resources.Styles.MenuDetailStyle">
+    
+    <Style TargetType="ListView">
+        <Setter Property="BackgroundColor" Value="#F5F5F5" />
+    </Style>
+
+    <Style TargetType="Image">
+        <Setter Property="WidthRequest" Value="100" />
+        <Setter Property="HeightRequest" Value="100" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCursoProgramacao.View.MatriculaView"
+             Title="Matricular">
+
+
+    <ContentPage.Resources>
+        <!-- Add more resources here -->
+        <ResourceDictionary Source="/Resources/Styles/MatriculaStyle.xaml" />
+        <!-- Add more resources here -->
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <!-- Dia Semana -->
+            <Picker x:Name="picDiaSemana" Style="{StaticResource PickerStyle}"
+            Grid.Column="0"
+            Title="Selecione Dia da Semana"
+            SelectedItem="{Binding objMartricula.matricula.diaSemana}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Segunda-Feira</x:String>
+                        <x:String>Terça-Feira</x:String>
+                        <x:String>Quarta-Feira</x:String>
+                        <x:String>Quinta-Feira</x:String>
+                        <x:String>Sexta-Feira</x:String>
+                        <x:String>Sábado</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Período -->
+            <Picker x:Name="picPeriodo" Style="{StaticResource PickerStyle}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Title="Selecione o Período"
+            ItemsSource="{Binding objPerido.ListaPeriodo}"
+            SelectedItem="{Binding IdPeriodo}"                         
+            SelectedIndexChanged="picPeriodo_SelectedIndexChanged"
+            ItemDisplayBinding="{Binding HorarioFormatado}"/>
+        </Grid>
+
+        <!--Curso-->
+        <Picker x:Name="picCurso" Style="{StaticResource PickerStyle}"
+            Title="Selecione o Curso"
+            ItemsSource="{Binding objCurso.ListaCurso}"
+            SelectedItem="{Binding IdCurso}"                         
+            ItemDisplayBinding="{Binding NomeCurso}"
+            SelectedIndexChanged="picCurso_SelectedIndexChanged"/>
+
+        <!--Professor-->
+        <Picker x:Name="picProfessor" Style="{StaticResource PickerStyle}"
+            Title="Selecione o Professor"
+            ItemsSource="{Binding objProfessor.ListaProfessor}"
+            SelectedItem="{Binding IdProfessor}"                         
+            ItemDisplayBinding="{Binding NomeProfessorCompleto}"
+            SelectedIndexChanged="picProfessor_SelectedIndexChanged"/>
+
+            <!--Pequisa de Alunos-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Frame  HeightRequest="50" Margin="15,5,15,0" Padding="3" Grid.Column="0"
+               CornerRadius="5">
+                <HorizontalStackLayout >
+                    <Image Source="search_icon.png" WidthRequest="30" HeightRequest="30"/>
+                    <Entry Placeholder="Nome do Aluno" x:Name="txtBuscarAluno" WidthRequest="250"  TextChanged="txtBuscarAluno_TextChanged"/>
+                </HorizontalStackLayout>
+            </Frame>
+            <ImageButton x:Name="btnAdicionar" HeightRequest="40" Grid.Column="1" VerticalOptions="End" Clicked="btnAdicionar_Clicked">
+                <ImageButton.Source>
+                    <FileImageSource File="add_icone.png" />
+                </ImageButton.Source>
+            </ImageButton>
+        </Grid>
+
+        <!--Lista de Alunos-->
+        <CollectionView  x:Name="lstListaAlunos" SelectionMode="Single" Margin="0,10,0,0"
+                         ItemsSource="{Binding objAluno.ListaAluno}" MaximumHeightRequest="500">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" Padding="15" Margin="10,5,5,5">
+
+                        <Grid ColumnDefinitions="Auto,*,*,*">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <!--Items do Grid-->
+                            <ImageButton x:Name="btnVer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"  HeightRequest="40" 
+                                        Clicked="btnVer_Clicked" HorizontalOptions="End">
+                                <ImageButton.Source>
+                                    <FileImageSource File="ver_icone.png" />
+                                </ImageButton.Source>
+                            </ImageButton>
+
+                            <ImageButton x:Name="btnRemover"  Grid.Column="3" Grid.Row="0" Grid.RowSpan="3"  HeightRequest="40"
+                                        Clicked="btnRemover_Clicked" HorizontalOptions="End">
+                                <ImageButton.Source>
+                                    <FileImageSource File="deletar_icone.png" />
+                                </ImageButton.Source>
+                            </ImageButton>
+
+                            <Label Grid.Column="0" Grid.Row="0" FontAttributes="Bold" FontSize="15" Margin="0,0,0,10">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="NomeAluno" />
+                                        <Binding Path="SobrenomeAluno" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Grid.Column="0" Grid.Row="1" FontAttributes="Bold" FontSize="12" TextColor="Gray"
+                                LineBreakMode="WordWrap" Margin="0,0,0,5">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}Idade: {0} Celular: {1}">
+                                        <Binding Path="Idade" />
+                                        <Binding Path="CelularAluno" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+                            <Label Grid.Column="0" Grid.Row="2" FontAttributes="Bold" FontSize="12" TextColor="Gray"
+                                 LineBreakMode="WordWrap" VerticalOptions="Start">
+                                <Label.Text>
+                                    <Binding Path="EnderecoAluno">
+                                        <Binding.StringFormat>
+                                            Endereço: {0}
+                                        </Binding.StringFormat>
+                                    </Binding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                        <!--Chama i evento do grid selecteChanged-->
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer  />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Salvar" Style="{StaticResource ButtonStyle}" x:Name="btnSalvar" Clicked="btnSalvar_Clicked"/>
+
+    </StackLayout>
+</ContentPage>

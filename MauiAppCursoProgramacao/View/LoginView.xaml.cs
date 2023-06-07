@@ -31,7 +31,6 @@ public partial class LoginView : ContentPage
 
     }
 
-
     //Valida Login
     async void btLogar_Clicked(object sender, EventArgs e)
     {
@@ -56,6 +55,7 @@ public partial class LoginView : ContentPage
             if (loginValido == true)
             {
                 Application.Current.MainPage = new MenuPrincipalView();
+
                 Preferences.Default.Set("logado", true);
                 Preferences.Default.Set("usuarioLogado", objLogin.loginModel.userLogin);
             }
@@ -72,12 +72,11 @@ public partial class LoginView : ContentPage
         }
     }
 
-    //Muda o focu para o botão logar
-    private void txtSenha_Unfocused(object sender, FocusEventArgs e)
+    private void txtSenha_Completed(object sender, EventArgs e)
     {
+
+        txtSenha.Unfocus();
         btLogar.Focus();
+        btLogar_Clicked(sender, e);
     }
-
-
-
 }

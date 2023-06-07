@@ -20,7 +20,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="LightGray" Padding="5" Margin="5">
-                            <Grid ColumnDefinitions="150,*,0">
+                            <Grid ColumnDefinitions="auto,*,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*" />
@@ -29,7 +29,7 @@
                                 
                                 <!--Items do Grid-->
                                 <Image Source="{Binding imgStr}" WidthRequest="90" HeightRequest="90"
-                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="0,1" />
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="0,0" />
 
                                 <Label Grid.Column="1" Grid.Row="0" FontAttributes="Bold" FontSize="15">
                                     <Label.Text>
@@ -74,9 +74,8 @@
         <!--Pequisa de Alunos-->
         <Frame Style="{StaticResource FrameStyle}">
             <HorizontalStackLayout HorizontalOptions="Center">
-
                 <Image Source="search_icon.png" WidthRequest="30" HeightRequest="30"  Grid.Column="0" Margin="5,5,5,0" />
-                <Entry Placeholder="Nome do Aluno" x:Name="txtBuscarAluno" WidthRequest="300" Completed="txtBuscarAluno_Completed"
+                <Entry Placeholder="Nome do Aluno" x:Name="txtBuscarAluno"  Completed="txtBuscarAluno_Completed" WidthRequest="250"
                    TextChanged="txtBuscarAluno_TextChanged" Style="{StaticResource EntryStyle}" ClearButtonVisibility="WhileEditing"/>
             </HorizontalStackLayout>
         </Frame>

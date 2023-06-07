@@ -21,7 +21,7 @@
                 <Button x:Name="btSelecionarFoto" Text="Selecionar" BackgroundColor="DarkCyan" Clicked="btSelecionarFoto_Clicked" Margin="5,0"/>
 
                 <Frame x:Name="frameFoto" BackgroundColor="DarkCyan" CornerRadius="5" Padding="5"
-                HorizontalOptions="Center" WidthRequest="30" HeightRequest="30" Grid.Row="0" Grid.Column="1">
+                HorizontalOptions="Center" WidthRequest="100" HeightRequest="45" Grid.Row="0" Grid.Column="1">
                     <ImageButton x:Name="btnCamera" Clicked="btnCamera_Clicked">
                         <ImageButton.Source>
                             <FileImageSource File="photo_icone.png" />
@@ -35,7 +35,6 @@
         <!--Caixas de Texto Para Preenchimento -->
         <Label Text="ID:" IsVisible="false" />
         <Entry Text="{Binding Aluno.IdAluno}" IsVisible="false"/>
-
 
         <Label Text="Nome:"  FontAttributes="Bold" />
         <Entry Keyboard="Text" x:Name="txtNome" Text="{Binding objAluno.Aluno.NomeAluno}"
@@ -58,7 +57,6 @@
         <Entry x:Name="txtEndereco" Text="{Binding objAluno.Aluno.EnderecoAluno}" 
                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference dtpDataNascimento}"/>
 
-
         <Label Text="Data de Nascimento:"  FontAttributes="Bold" />
         <DatePicker x:Name="dtpDataNascimento" Date="{Binding objAluno.Aluno.DataNascimentoAluno , Mode=TwoWay}" />
 
@@ -72,8 +70,9 @@
             </Picker.ItemsSource>
         </Picker>
 
-            <Button x:Name="btnCadastrar" Text="Cadastrar" BackgroundColor="DarkCyan" Clicked="btnCadastrar_Clicked"
+        <Button x:Name="btnCadastrar" Text="Cadastrar" BackgroundColor="DarkCyan" Clicked="btnCadastrar_Clicked"
                     ToolTipProperties.Text="Click para adiconar aluno"  Margin="2.5,0"/>
+
 
     </StackLayout>
 

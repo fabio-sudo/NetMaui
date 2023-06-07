@@ -100,6 +100,7 @@ public partial class AlunoView : ContentPage
             objAluno.Aluno.DataNascimentoAluno = DateTime.Today;
         }
 
+
         //Mensagem de erro TOAST
         private async void toastMessage(string MessageToast)
         {
@@ -114,59 +115,52 @@ public partial class AlunoView : ContentPage
             await toast.Show(cancellationTokenSource.Token);
         }
 
+
         //Valida Campos
         private bool ValidaCampos()
         {
             // Verificar se o campo "Nome" está preenchido
             if (string.IsNullOrEmpty(txtNome.Text))
             {
-
                 toastMessage("Informe o nome do aluno!");
                 return false;
             }
-
             // Verificar se o campo "Sobrenome" está preenchido
             if (string.IsNullOrEmpty(txtSobrenome.Text))
             {
                 toastMessage("Informe o sobrenome do aluno!");
                 return false;
             }
-
             // Verificar se o campo "CPF" está preenchido
             if (string.IsNullOrEmpty(txtCpf.Text) || !metodoValidaCPF.ValidarCPF(txtCpf.Text))
             {
                 toastMessage("CPF inválido!");
                 return false;
             }
-
             // Verificar se o campo "Celular" está preenchido
             if (string.IsNullOrEmpty(txtCelular.Text))
             {
                 toastMessage("Informe o celular do aluno!");
                 return false;
             }
-
             // Verificar se o campo "Endereço" está preenchido
             if (string.IsNullOrEmpty(txtEndereco.Text))
             {
                 toastMessage("Informe o endereço do aluno!");
                 return false;
             }
-
             // Verificar se o campo "Data de Nascimento" foi selecionado corretamente
             if (dtpDataNascimento.Date == DateTime.Now)
             {
                 toastMessage("Informe a data de nascimento do aluno!");
                 return false;
             }
-
             // Verificar se o campo "Status" foi selecionado corretamente
             if (string.IsNullOrEmpty(picEstatus.SelectedItem?.ToString()))
             {
                 toastMessage("Informe o estatus do aluno!");
                 return false;
             }
-
             return true;
         }
 
@@ -317,11 +311,13 @@ public partial class AlunoView : ContentPage
             entry.Text = digitsOnly;
         }
 
-       //Realiza Cadastro ou  Alteração ou Exclusão
+       //------------------------------------------Realiza Cadastro ou  Alteração ou Exclusão
        private async void btnCadastrar_Clicked(object sender, EventArgs e)
         {
         try
         {
+
+
             if (btnCadastrar.Text == "Cadastrar")
             {
                 if (ValidaCampos() == true)
@@ -344,8 +340,7 @@ public partial class AlunoView : ContentPage
 
                             objAluno.Aluno.imgStr = "/img/noimagen.jpg";
                         }
-                        
-
+                     
                         //Arruama a data
                         int idade = DateTime.Now.Year - objAluno.Aluno.DataNascimentoAluno.Value.Year;
                         if (objAluno.Aluno.DataNascimentoAluno.Value > DateTime.Now.AddYears(-idade))
@@ -355,7 +350,6 @@ public partial class AlunoView : ContentPage
                         //Retorno para formulario anterior Para o mesmo atualizar
                         lista.Add(objAluno.Aluno);//Aluno cadastrado
                         ConcluirAcao("ok");
-
 
                         // Success
                         bool resposta = await DisplayAlert("Sucesso", "Aluno cadastrado com sucesso!", "Continuar", "Sair");
@@ -367,9 +361,7 @@ public partial class AlunoView : ContentPage
                         }
                         else
                         {
-
                             await Navigation.PopAsync();
-
                         }
                     }
                     else
@@ -377,7 +369,6 @@ public partial class AlunoView : ContentPage
                         // Failure
                         await DisplayAlert("Erro", "Falha ao cadastrar aluno.", "OK");
                     }
-
                 }
             }
             
@@ -396,6 +387,19 @@ public partial class AlunoView : ContentPage
 
                         if (result == true)
                         {
+                            //cria a imagem
+                            objAluno.Aluno.imgStr = objAluno.Aluno.Img == null ? ""
+                                           : "data:image/" + System.IO.Path.GetExtension(objAluno.Aluno.NomeImg).Substring(1) +
+                                           ";base64," + Convert.ToBase64String(objAluno.Aluno.Img);
+
+                            //caso não haja imagem define a imagem padrão
+                            if (objAluno.Aluno.imgStr == "")
+                            {
+
+                                objAluno.Aluno.imgStr = "/img/noimagen.jpg";
+                            }
+
+
                             // Success
                             await DisplayAlert("Sucesso", "Aluno alterado com sucesso!", "Continuar");
 

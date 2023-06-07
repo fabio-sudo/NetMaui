@@ -71,7 +71,7 @@
     </Style>
 
     <Style TargetType="Frame" x:Key="FrameStyle">
-        <Setter Property="BorderColor" Value="Black" />
+        <Setter Property="BorderColor" Value="LightGray" />
         <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="CornerRadius" Value="5" />

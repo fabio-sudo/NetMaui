@@ -9,7 +9,6 @@ public partial class AlunoBuscarView : ContentPage
 {
     //Atualizações em segundo plano
     private System.Timers.Timer timer;
-
     public AlunoModelView objAluno { get; set; }
     int quantidadeLimitador = 10; // Define a quantidade máxima de itens desejada
     int quantidadeMaximaItem = 0;
@@ -29,7 +28,6 @@ public partial class AlunoBuscarView : ContentPage
         objAluno.RefreshCommand = new Command(ExecuteRefreshCommand);
 
         InitializeComponent();
-
         BindingContext = this;
 
         //busca alunos cadastrados no banco via API
@@ -73,13 +71,12 @@ public partial class AlunoBuscarView : ContentPage
     }
 
     //Busca Alunos
-    public async void MetodoBuscarAlunos(string nomeAluno)
-    {
+    private async void MetodoBuscarAlunos(string nomeAluno){
         try
         {
+
             //Barra de Progresso 
             objAluno.IsRefreshing = true;
-
             if (nomeAluno == "")
             {
                 //Consumindo API   
@@ -92,6 +89,8 @@ public partial class AlunoBuscarView : ContentPage
                 objAluno.ListaAluno =
                 await ClientHttp.BuscarLista<AlunoModel>(urlBase, rotaApi + "/BuscarPorNome" + nomeAluno, token);
             }
+
+            objAluno.ListaAluno.Count();
             objAluno.IsRefreshing = false;
 
             //Coloca Img Sem imagem aonde nao foi cadastrado imagem 
@@ -113,15 +112,15 @@ public partial class AlunoBuscarView : ContentPage
 
             lista = objAluno.ListaAluno;
 
-
             quantidadeMaximaItem = objAluno.ListaAluno.Count();
             objAluno.ListaAluno = objAluno.ListaAluno.Take(quantidadeLimitador).ToList();
+                
         }
         catch (Exception ex) { throw new Exception(ex.Message); }
     }
 
     //Carregar itens Delimitados
-   private void scvScroll_Scrolled(object sender, ScrolledEventArgs e)
+    private void scvScroll_Scrolled(object sender, ScrolledEventArgs e)
      {
         double scrollY = scvScroll.ContentSize.Height - scvScroll.Height;
 
@@ -229,7 +228,7 @@ public partial class AlunoBuscarView : ContentPage
         metodoAtulizaFormulario(alunoAdd);
     }
 
-    //Metodo Atualiza Formulario resposta do formulárioa anterior
+    //-----------------------------Recebe retorno formulário
     private void metodoAtulizaFormulario(AlunoView alunoAdd)
     {
         alunoAdd.OnAlunoAddCompleted += (retorno) =>
@@ -249,6 +248,7 @@ public partial class AlunoBuscarView : ContentPage
                 {
                     alunoAlterarLista = alunoAdd.objAluno.Aluno;
                 }
+
             }
             else if (retorno == "ExcluirOK")
             {

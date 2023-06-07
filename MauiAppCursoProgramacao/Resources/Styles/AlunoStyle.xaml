@@ -8,7 +8,7 @@
         <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="Padding" Value="3" />
         <Setter Property="CornerRadius" Value="5" />
-        <Setter Property="Margin" Value="30,10,5,5" />
+        <Setter Property="Margin" Value="15,10,5,5" />
         <Setter Property="VerticalOptions" Value="FillAndExpand"/>
     </Style>
 

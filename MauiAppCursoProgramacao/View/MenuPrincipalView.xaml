@@ -16,6 +16,7 @@
     <FlyoutPage.Detail>
         <NavigationPage x:Name="Navegacao"  BarBackgroundColor="#2196F3" BarTextColor="White">
             <x:Arguments>
+                <!--Carrega Pagina-->
                 <page:MenuDetailView></page:MenuDetailView>
             </x:Arguments>
         </NavigationPage>

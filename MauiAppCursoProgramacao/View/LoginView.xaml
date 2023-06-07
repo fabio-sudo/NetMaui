@@ -69,7 +69,8 @@
                     Grid.ColumnSpan="2"
                     Style="{StaticResource LoginEntryStyle}"
                     Text="{Binding objLogin.loginModel.userLogin}"
-                    Margin="0,5,0,5" />
+                    Margin="0,5,0,5"
+                    toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtSenha}"/>
 
                     <!-- Senha -->
                     <Image Source="senhaicone.png"
@@ -88,9 +89,10 @@
                     IsPassword="true"
                     Style="{StaticResource LoginEntryStyle}"
                     Text="{Binding objLogin.loginModel.senhaLogin}"
-                    Margin="0,5,0,5" 
-                    Unfocused="txtSenha_Unfocused" />
+                    Margin="0,5,0,5"
+                    Completed="txtSenha_Completed"/>
 
+                    
                     <!-- BOTÃO -->
                     <Button x:Name="btLogar" Text="Entrar" Style="{StaticResource LogarButtonStyle}" Clicked="btLogar_Clicked"
                     Grid.Row="3"

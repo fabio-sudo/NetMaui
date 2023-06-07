@@ -2,11 +2,53 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCursoProgramacao.View.MenuDetailView"
-             Title="MenuDetailView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Detalhes"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Menu Principal">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary Source="/Resources/Styles/MenuDetailStyle.xaml" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <HorizontalStackLayout Margin="15,10">
+            <Label x:Name="lbTitulo" Text="Olá, " FontSize="Large" 
+                   FontAttributes="Bold" FontFamily="Cooper Black"/>
+
+            <Label x:Name="lbUsuario" Text=""  
+                   FontSize="Large" FontAttributes="Bold" TextColor="#2196F3"/>
+
+            <Label Text=" 👋🏻" FontSize="Large" FontFamily="Cooper Black"/>
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout VerticalOptions="Center">
+        <CollectionView ItemsSource="{Binding objMenuLista.Lista}" SelectionChanged="lstMenu_SelectionChanged"
+                        x:Name="lstMenu" Margin="10,5" SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="15" HorizontalItemSpacing="5"  />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="White" HorizontalOptions="Center" BorderColor="LightGray"
+                               Padding="40">
+
+                            <VerticalStackLayout>
+                                <Image Source="{Binding nomeIcone}" WidthRequest="100" HeightRequest="100"  />
+                                <Label Text="{Binding nomeDescricao}" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                     
+                        <!--Chama i evento do grid selecteChanged-->
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ItemLista_Tapped" />
+                        </Frame.GestureRecognizers>
+                    
+                        </Frame>
+                    </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+            
     </VerticalStackLayout>
-</ContentPage>
+    </StackLayout>
+    
+    
+    </ContentPage>

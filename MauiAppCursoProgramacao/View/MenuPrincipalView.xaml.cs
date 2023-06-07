@@ -1,18 +1,13 @@
-
 namespace MauiAppCursoProgramacao.View;
-
 public partial class MenuPrincipalView : FlyoutPage
 {
-	public MenuPrincipalView()
+    public MenuPrincipalView()
 	{
-		InitializeComponent();
+        InitializeComponent();
 
-		App.MenuApp = this;
-		App.Navegacao = Navegacao;
+        App.MenuApp = this;
+        App.Navegacao = Navegacao;
+ 
     }
-
-
-
-
 
 }

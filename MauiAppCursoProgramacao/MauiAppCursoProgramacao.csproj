@@ -49,10 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\add_icone.png" />
+	  <None Remove="Resources\Images\deletar_icone.png" />
 	  <None Remove="Resources\Images\img_icone.png" />
 	  <None Remove="Resources\Images\nofoto.jpg" />
 	  <None Remove="Resources\Images\noimagen.jpg" />
 	  <None Remove="Resources\Images\search_icon.png" />
+	  <None Remove="Resources\Images\ver_icone.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,6 +78,12 @@
 	  <MauiXaml Update="Resources\Styles\LoginStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\MatriculaStyle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\MenuDetailStyle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MenuStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -85,6 +94,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\LoginView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MatriculaBuscarView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MatriculaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\MenuDetailView.xaml">
