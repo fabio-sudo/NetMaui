@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCursoProgramacao.View.MatriculaAlunoView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="MatriculaAlunoView">
+    <!--Imagem -->
+    <StackLayout Padding="30">
+        <Image x:Name="imgAluno" Source="{Binding objAluno.Aluno.imgStr}" WidthRequest="200" Aspect="AspectFill" 
+               HeightRequest="150" Margin="10,10,10,10" />
+        
+        <!--Barra deProgresso-->
+        <ActivityIndicator IsRunning="{Binding objAluno.IsRefreshing}" x:Name="barraProgresso" Color="DarkCyan" />
+
+        <!--Caixas de Texto Para Preenchimento -->
+        <Label Text="ID:" IsVisible="false" />
+        <Entry Text="{Binding Aluno.IdAluno}" IsVisible="false"/>
+
+        <Label Text="Nome:"  FontAttributes="Bold" />
+        <Entry Keyboard="Text" x:Name="txtNome" Text="{Binding objAluno.Aluno.NomeAluno}"
+             IsEnabled="False" toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtSobrenome}"/>
+
+        <Label Text="Sobrenome:"  FontAttributes="Bold" />
+        <Entry Keyboard="Text" x:Name="txtSobrenome" Text="{Binding objAluno.Aluno.SobrenomeAluno}" 
+            IsEnabled="False" toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtCpf}"/>
+
+        <Label Text="CPF:"  FontAttributes="Bold" />
+        <Entry Keyboard="Numeric" x:Name="txtCpf" Text="{Binding objAluno.Aluno.CpfAluno}" IsEnabled="False" 
+                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtCelular}"/>
+
+
+        <Label Text="Celular:"  FontAttributes="Bold" />
+        <Entry Keyboard="Telephone" x:Name="txtCelular" Text="{Binding objAluno.Aluno.CelularAluno}" IsEnabled="False"
+                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtEndereco}"/>
+
+        <Label Text="Endereço:" FontAttributes="Bold" />
+        <Entry x:Name="txtEndereco" Text="{Binding objAluno.Aluno.EnderecoAluno}" IsEnabled="False" 
+               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference dtpDataNascimento}"/>
+
+        <Label Text="Data de Nascimento:"  FontAttributes="Bold" />
+        <DatePicker x:Name="dtpDataNascimento" Date="{Binding objAluno.Aluno.DataNascimentoAluno , Mode=TwoWay}" 
+                    IsEnabled="False"/>
+
+        <Label Text="Status:"  FontAttributes="Bold"/>
+        <Picker x:Name="picEstatus" Title="Selecione o status" SelectedItem="{Binding objAluno.Aluno.StatusAluno}" IsEnabled="False">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Cursando</x:String>
+                    <x:String>Espera</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button x:Name="btnVoltar" Text="Voltar" BackgroundColor="DarkCyan" Clicked="btnVoltar_Clicked"
+                    ToolTipProperties.Text="Click para voltar"  Margin="2.5,0"/>
+        
+
+
+    </StackLayout>
+</ContentPage>

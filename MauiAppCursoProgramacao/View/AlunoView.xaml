@@ -7,7 +7,7 @@
 
     <!--Imagem -->
     <StackLayout Padding="30">
-        <Image x:Name="imgAluno" Source="{Binding objAluno.imagen}" WidthRequest="200" Aspect="AspectFill" 
+        <Image x:Name="imgAluno" Source="{Binding objAluno.Aluno.imgStr}" WidthRequest="200" Aspect="AspectFill" 
                HeightRequest="150" Margin="10,10,10,10" />
 
         <!--Botões - Utilzado Grid Para Alinhamento -->

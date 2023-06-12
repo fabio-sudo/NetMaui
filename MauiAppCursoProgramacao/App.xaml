@@ -7,10 +7,11 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            <x:String x:Key="urlBase">https://d198-45-172-144-32.ngrok-free.app</x:String>
+            <x:String x:Key="urlBase">https://a182-45-172-144-32.ngrok-free.app</x:String>
             <x:String x:Key="token">TexteTokenProjeto2023API</x:String>
             <x:String x:Key="urlLogin" >/api/Login</x:String>
             <x:String x:Key="urlAluno" >/api/Aluno</x:String>
+            <x:String x:Key="urlAlunoFK" >/api/AlunoFK</x:String>
             <x:String x:Key="urlCurso" >/api/Curso</x:String>
             <x:String x:Key="urlPeriodo" >/api/Periodo</x:String>
             <x:String x:Key="urlProfessor" >/api/Professor</x:String>

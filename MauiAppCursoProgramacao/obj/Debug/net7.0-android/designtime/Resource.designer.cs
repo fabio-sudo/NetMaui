@@ -21728,6 +21728,9 @@ namespace MauiAppCursoProgramacao
 			// aapt resource value: 0x7F0700E5
 			public const int ver_icone = 2131165413;
 			
+			// aapt resource value: 0x7F0700E6
+			public const int whatsapp_icone = 2131165414;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

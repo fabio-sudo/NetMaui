@@ -1,26 +1,23 @@
 using MauiAppCursoProgramacao.Generico;
-using MauiAppCursoProgramacao.Metodos;
 using MauiAppCursoProgramacao.Model;
 using MauiAppCursoProgramacao.ModelView;
 using MauiAppPeriodoProgramacao.ModelView;
 using MauiAppProfessorProgramacao.ModelView;
-using System.Runtime.Intrinsics.Arm;
+using Microsoft.Maui.Platform;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MauiAppCursoProgramacao.View;
 
 public partial class MatriculaView : ContentPage
 {
-
     //Extends appXaml
     string urlBase = App.Current.Resources["urlBase"].ToString();
     string token = App.Current.Resources["token"].ToString();
+    string rotaApiAluno = App.Current.Resources["urlAluno"].ToString();
     string rotaApiCurso = App.Current.Resources["urlCurso"].ToString();
     string rotaApiPeriodo = App.Current.Resources["urlPeriodo"].ToString();
     string rotaApiProfessor = App.Current.Resources["urlProfessor"].ToString();
-
-    //Realiza Animação
-    AnimacaoBotao animacaoBotao = new AnimacaoBotao();
 
     public MatriculaModelView objMartricula { get; set; }
     public AlunoModelView objAluno { get; set; }
@@ -28,13 +25,13 @@ public partial class MatriculaView : ContentPage
     public PeriodoModelView objPerido { get; set; }
     public ProfessorModelView objProfessor { get; set; }
     public MatriculaView()
-	{
+    {
 
         InitializeComponent();
 
         objMartricula = new MatriculaModelView();
         objMartricula.matricula = new MatriculaModel();
-        
+
         //Aluno
         objAluno = new AlunoModelView(); // Inicialize objAluno aqui
         objAluno.Aluno = new AlunoModel();
@@ -55,41 +52,25 @@ public partial class MatriculaView : ContentPage
 
 
         BindingContext = this;
-        metodoGeraAlunos();
+
+        metodoGeraListas();
 
     }
 
-	private async void metodoGeraAlunos() {
+    //Gera listas para preencher os combobox
+    private async void metodoGeraListas() {
         try
         {
-            for (int i = 1; i <= 10; i++)
-        {
-            objAluno.Aluno = new AlunoModel();
 
-            objAluno.Aluno.IdAluno = i;
-            objAluno.Aluno.NomeAluno = "Nome " + i.ToString();
-            objAluno.Aluno.SobrenomeAluno = "Sobrenome " + i.ToString();
-            objAluno.Aluno.CpfAluno = "123.456.789-0" + i.ToString();
-            objAluno.Aluno.CelularAluno = "(00) 9 9999-999" + i.ToString();
-            objAluno.Aluno.EnderecoAluno = "Endereço " + i.ToString();
-            objAluno.Aluno.DataNascimentoAlunoStr =  i.ToString();
-            objAluno.Aluno.DataNascimentoAluno = DateTime.Now;
+            //Consumindo API   
+            objCurso.ListaCurso =
+            await ClientHttp.BuscarLista<CursoModel>(urlBase, rotaApiCurso, token);
 
+            objPerido.ListaPeriodo =
+            await ClientHttp.BuscarLista<PeriodoModel>(urlBase, rotaApiPeriodo, token);
 
-            objAluno.ListaAluno.Add(objAluno.Aluno);
-        }
-
-        objMartricula.matricula.listaAlunos = objAluno.ListaAluno;
-
-        //Consumindo API   
-        objCurso.ListaCurso =
-        await ClientHttp.BuscarLista<CursoModel>(urlBase, rotaApiCurso, token);
-
-        objPerido.ListaPeriodo =
-        await ClientHttp.BuscarLista<PeriodoModel>(urlBase, rotaApiPeriodo, token);
-
-        objProfessor.ListaProfessor =
-        await ClientHttp.BuscarLista<ProfessorModel>(urlBase, rotaApiProfessor, token);
+            objProfessor.ListaProfessor =
+            await ClientHttp.BuscarLista<ProfessorModel>(urlBase, rotaApiProfessor, token);
 
         }
         catch (Exception ex) { await DisplayAlert("Erro", ex.Message, "OK"); }
@@ -97,39 +78,62 @@ public partial class MatriculaView : ContentPage
 
     private async void btnAdicionar_Clicked(object sender, EventArgs e)
     {
-        animacaoBotao.metodoAnimacaoBotao(this.btnAdicionar);
+        btnAdicionar.IsEnabled = false;
 
         MatriculaBuscarView _MatriculaView = new MatriculaBuscarView(objAluno.ListaAluno); // Instancie a página do formulário
-        await Navigation.PushModalAsync(_MatriculaView);    
+        await Navigation.PushModalAsync(_MatriculaView);
+
+        _MatriculaView.OnAlunoAddCompleted += (retorno) =>
+        {
+            //Espera o retorno para poder realizar atualização
+            if (retorno == "ok")
+            {
+
+                objMartricula.matricula.listaAlunos = _MatriculaView.ListaCorrente;
+                objAluno.ListaAluno = new List<AlunoModel>(objMartricula.matricula.listaAlunos);
+            }
+        };
+
+        btnAdicionar.IsEnabled = true;
+
     }
 
+    //Ver o whatsApp pelo aluno 
     private void btnVer_Clicked(object sender, EventArgs e)
     {
-        //var btn = (ImageButton)sender; // Obtém o botão clicado
-        //AnimacaoBotao animacaoBotao = new AnimacaoBotao();
-        //animacaoBotao.metodoAnimacaoBotao(btn);
+        var button = (ImageButton)sender;
+        objAluno.Aluno = button.BindingContext as AlunoModel; // Substitua "SeuModelo" pelo tipo de objeto na sua coleção
 
-        // Success
-        //bool resposta = await DisplayAlert("Remover ?", "Deseja realmenter remover o Aluno?", "Sim", "Não");
-
-        //if (resposta == true)
-        //{
-        //}
-
-
+        string numeroCelular = Regex.Replace(objAluno.Aluno.CelularAluno, "[^0-9]", "");
+        // Abra o link do WhatsApp
+        var uri = new Uri("https://wa.me/" + numeroCelular);
+        _ = Launcher.OpenAsync(uri);
     }
 
+    //Remove o aluno da lista
     private void btnRemover_Clicked(object sender, EventArgs e)
     {
 
         var button = (ImageButton)sender;
-            objAluno.Aluno = button.BindingContext as AlunoModel; // Substitua "SeuModelo" pelo tipo de objeto na sua coleção
+        objAluno.Aluno = button.BindingContext as AlunoModel; // Substitua "SeuModelo" pelo tipo de objeto na sua coleção
 
-            if (objAluno.Aluno != null)
-            {
-                objMartricula.matricula.listaAlunos.Remove(objAluno.Aluno);
-                objAluno.ListaAluno = new List<AlunoModel>(objMartricula.matricula.listaAlunos);
-            }
+        if (objAluno.Aluno != null)
+        {
+            objMartricula.matricula.listaAlunos.Remove(objAluno.Aluno);
+            objAluno.ListaAluno = new List<AlunoModel>(objMartricula.matricula.listaAlunos);
+        }
+    }
+
+    private async void btnAlunoVer_Clicked(object sender, EventArgs e)
+    {
+        var button = (ImageButton)sender;
+        objAluno.Aluno = button.BindingContext as AlunoModel; // Substitua "SeuModelo" pelo tipo de objeto na sua coleção
+
+        if (objAluno.Aluno != null)
+        {
+            MatriculaAlunoView _MatriculaView = new MatriculaAlunoView(objAluno.Aluno); // Instancie a página do formulário
+            await Navigation.PushModalAsync(_MatriculaView);
+        }
     }
 
     //Selecionar objetos
@@ -157,10 +161,8 @@ public partial class MatriculaView : ContentPage
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                if (objAluno.ListaAluno.Count < objMartricula.matricula.listaAlunos.Count)
-                {
-                    objAluno.ListaAluno = objMartricula.matricula.listaAlunos;//Caso a lista for menor que a lista na memória
-                }
+
+                objAluno.ListaAluno = objMartricula.matricula.listaAlunos;//Caso a lista for menor que a lista na memória
 
                 string normalizedSearchText = searchText.Normalize(NormalizationForm.FormD);
                 var filteredAlunos = objAluno.ListaAluno.Where(p =>
@@ -171,14 +173,77 @@ public partial class MatriculaView : ContentPage
 
                 objAluno.ListaAluno = filteredAlunos.ToList();
             }
+            else
+            {
+
+                objAluno.ListaAluno = objMartricula.matricula.listaAlunos;
+
+            }
         }
         catch (Exception ex) { await DisplayAlert("Erro", ex.Message, "OK"); }
 
     }
 
-    private  void btnSalvar_Clicked(object sender, EventArgs e)
+    //Valida os campos
+    private async Task<bool> metodoValidaCadastroAsync()
     {
+        if (picDiaSemana.SelectedItem == null)
+        {
 
+            await DisplayAlert("Erro Dia Semana", "Selecione o dia da Semana!", "Ok");
+            return false;
+        }
+        else if (picPeriodo.SelectedItem == null)
+        {
+
+            await DisplayAlert("Erro Período", "Selecione o Período!", "Ok");
+            return false;
+        }
+        else if (picCurso.SelectedItem == null)
+        {
+
+            await DisplayAlert("Erro Curso", "Selecione o Curso!", "Ok");
+            return false;
+        }
+        else if (picProfessor.SelectedItem == null)
+        {
+
+            await DisplayAlert("Erro Professor", "Selecione o Professor!", "Ok");
+            return false;
+        }
+        else if (objAluno.ListaAluno.Count <= 0)
+        {
+
+            await DisplayAlert("Erro Alunos", "Adicione os Alunos!", "Ok");
+            return false;
+        }
+
+        return true;
     }
+
+    private async void btnSalvar_Clicked(object sender, EventArgs e)
+    {
+        bool camposValidos = await metodoValidaCadastroAsync();
+
+        if (camposValidos == true)
+        {
+            // Success
+            bool resposta = await DisplayAlert("Matricular Alunos", "Deseja realmenter realizar a matrícula?", "Sim", "Não");
+
+            if (resposta == true)
+            {
+                //Criando objeto Matricula
+                objMartricula.matricula.curso = objCurso.Curso;
+                objMartricula.matricula.periodo = objPerido.Periodo;
+                objMartricula.matricula.professor = objProfessor.Professor;
+                objMartricula.matricula.diaSemana = objMartricula.matricula.diaSemana;
+
+                objMartricula.matricula.listaAlunos = objAluno.ListaAluno;
+
+                //Utilização do API para realizar matricula
+            }
+        }
+    }
+
 
 }

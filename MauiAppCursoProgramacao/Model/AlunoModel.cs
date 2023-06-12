@@ -16,6 +16,7 @@
         public string imgStr { get; set; } = "";
         public string? NomeImg { get; set; } = "";
         public byte[]? Img { get; set; } = null!;
+        public bool IsSelected { get; set; }
     }
 
 }
