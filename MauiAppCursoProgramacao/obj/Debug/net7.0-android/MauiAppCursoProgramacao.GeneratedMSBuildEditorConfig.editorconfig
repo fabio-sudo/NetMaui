@@ -104,6 +104,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiAppCursoProgramacao.Vi
 build_metadata.AdditionalFiles.TargetPath = View\MatriculaBuscarView.xaml
 build_metadata.AdditionalFiles.RelativePath = View\MatriculaBuscarView.xaml
 
+[C:/Users/Admin/Desktop/MauiAppCursoProgramacao/MauiAppCursoProgramacao/View/MatriculaMenuView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiAppCursoProgramacao.View.MatriculaMenuView.xaml
+build_metadata.AdditionalFiles.TargetPath = View\MatriculaMenuView.xaml
+build_metadata.AdditionalFiles.RelativePath = View\MatriculaMenuView.xaml
+
 [C:/Users/Admin/Desktop/MauiAppCursoProgramacao/MauiAppCursoProgramacao/View/MatriculaView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiAppCursoProgramacao.View.MatriculaView.xaml

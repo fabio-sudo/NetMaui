@@ -30,7 +30,7 @@
                     <DataTemplate>
                         <Frame BorderColor="LightGray" Padding="15" Margin="10,5,20,5">
 
-                            <Grid ColumnDefinitions="*,230,*">
+                            <Grid ColumnDefinitions="*,230,*,*">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*" />
@@ -70,10 +70,17 @@
                                 </Label>
 
                                 <!--Items do Grid-->
-                                <ImageButton x:Name="btnVer" Grid.Column="3" Grid.Row="0" Grid.RowSpan="3"  HeightRequest="40" 
-                                      HorizontalOptions="Center"  Clicked="btnVer_Clicked">
+                                <ImageButton x:Name="btnVer" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"  HeightRequest="40" 
+                                      HorizontalOptions="Center"  Clicked="btnVer_Clicked" Margin="0,0,5,0">
                                     <ImageButton.Source>
                                         <FileImageSource File="ver_icone.png" />
+                                    </ImageButton.Source>
+                                </ImageButton>
+
+                                <ImageButton x:Name="btnWhats" Grid.Column="3" Grid.Row="0" Grid.RowSpan="3"  HeightRequest="40" 
+                                        Clicked="btnWhats_Clicked" HorizontalOptions="End" Margin="0,0,5,0">
+                                    <ImageButton.Source>
+                                        <FileImageSource File="whatsapp_icone.png" />
                                     </ImageButton.Source>
                                 </ImageButton>
 

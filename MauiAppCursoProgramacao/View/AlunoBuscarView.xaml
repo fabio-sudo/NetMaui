@@ -81,8 +81,8 @@
         </Frame>
 
         <!--Botão Adicionar Alunos-->
-        <Button x:Name="btnAdicionar" Text="+" WidthRequest="50" HeightRequest="50" CornerRadius="30" Clicked="btnAdicionar_Clicked"
-                AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.95,0.95,40,40"  BackgroundColor="DarkCyan"/>
+        <Button x:Name="btnAdicionar" Text="+" WidthRequest="50" HeightRequest="50" CornerRadius="30" Clicked="btnAdicionar_Clicked" FontSize="20"
+         FontAttributes="Bold" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.95,0.95,40,40"  BackgroundColor="DarkCyan"/>
 
         <!--Barra deProgresso-->
         <ActivityIndicator IsRunning="{Binding objAluno.IsRefreshing}" x:Name="barraProgresso" Color="DarkCyan"

@@ -50,10 +50,17 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\add_icone.png" />
+	  <None Remove="Resources\Images\cabelereiro_icone.png" />
+	  <None Remove="Resources\Images\costura_icone.png" />
+	  <None Remove="Resources\Images\cozinha_icone.png" />
 	  <None Remove="Resources\Images\deletar_icone.png" />
+	  <None Remove="Resources\Images\depilacao_icone.png" />
 	  <None Remove="Resources\Images\img_icone.png" />
+	  <None Remove="Resources\Images\informatica_icone.png" />
+	  <None Remove="Resources\Images\maquiagem_icone.png" />
 	  <None Remove="Resources\Images\nofoto.jpg" />
 	  <None Remove="Resources\Images\noimagen.jpg" />
+	  <None Remove="Resources\Images\programacao_icone.png" />
 	  <None Remove="Resources\Images\search_icon.png" />
 	  <None Remove="Resources\Images\ver_icone.png" />
 	  <None Remove="Resources\Images\whatsapp_icone.png" />
@@ -101,6 +108,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\MatriculaBuscarView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MatriculaMenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\MatriculaView.xaml">

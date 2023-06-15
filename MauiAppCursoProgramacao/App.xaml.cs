@@ -10,7 +10,7 @@ public partial class App : Application
 
 
 
-        MainPage = new MatriculaView();
+        MainPage = new MatriculaMenuView();
     }
        // MainPage = new AppShell();
 

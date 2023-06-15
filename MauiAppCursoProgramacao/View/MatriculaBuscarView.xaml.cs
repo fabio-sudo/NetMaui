@@ -2,6 +2,7 @@ using MauiAppCursoProgramacao.Generico;
 using MauiAppCursoProgramacao.Model;
 using MauiAppCursoProgramacao.ModelView;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MauiAppCursoProgramacao.View;
 
@@ -141,6 +142,18 @@ public partial class MatriculaBuscarView : ContentPage
         }
     }
 
+    //Abre whats aap
+    private void btnWhats_Clicked(object sender, EventArgs e)
+    {
+        var button = (ImageButton)sender;
+        objAluno.Aluno = button.BindingContext as AlunoModel; // Substitua "SeuModelo" pelo tipo de objeto na sua coleção
+
+        string numeroCelular = Regex.Replace(objAluno.Aluno.CelularAluno, "[^0-9]", "");
+        // Abra o link do WhatsApp
+        var uri = new Uri("https://wa.me/" + numeroCelular);
+        _ = Launcher.OpenAsync(uri);
+    }
+
     //Volta ao formulário anterior
     private async void btnVoltar_Clicked(object sender, EventArgs e)
     {
@@ -164,4 +177,7 @@ public partial class MatriculaBuscarView : ContentPage
         }
 
     }
+
+
+
 }

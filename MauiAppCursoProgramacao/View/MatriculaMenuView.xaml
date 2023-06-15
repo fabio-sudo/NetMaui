@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppCursoProgramacao.View.MatriculaMenuView"
+             Title="MatriculaMenuView">
+    
+    <!-- Paineis de Seleção de Matriculas --> 
+        <ContentPage.Resources>
+            <!-- Add more resources here -->
+            <ResourceDictionary Source="/Resources/Styles/MatriculaStyle.xaml" />
+            <!-- Add more resources here -->
+        </ContentPage.Resources>
+
+
+    <AbsoluteLayout>
+        <!--Filtro Curso-->
+        <!--Filtro Período-->
+        <!--Filtro Dia Semana-->
+
+        <!--Lista de Alunos-->
+        <ScrollView
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" Margin="10,80,10,10">
+            
+        <CollectionView x:Name="lstListaMatriculas" SelectionMode="Single"
+                 ItemsSource="{Binding objMatricula.ListaMatricula}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" Padding="15" Margin="5">
+                        <Grid ColumnDefinitions="Auto,Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <!--Items do Grid-->
+                            <Image Source="{Binding imgCurso}" WidthRequest="60" HeightRequest="60"
+                             Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="0,0,10,0" />
+
+                            <Label Grid.Column="1" Grid.Row="0" FontAttributes="Bold" FontSize="Body" Margin="0,5,5,5">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                        <Binding Path="curso.NomeCurso" />
+                                        <Binding Path="diaSemana" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            
+                            <Label Grid.Column="1" Grid.Row="1" FontAttributes="Bold" FontSize="Caption" TextColor="Gray"
+                       LineBreakMode="WordWrap">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}Turma: {0} Professor: {1}">
+                                        <Binding Path="ordemMatricula" />
+                                        <Binding Path="professor.NomeProfessorCompleto" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+                            <Label Grid.Column="1" Grid.Row="2" FontAttributes="Bold" FontSize="Caption" TextColor="Gray"
+                       LineBreakMode="WordWrap" VerticalOptions="Start">
+                                <Label.Text>
+                                    <Binding Path="periodo.HorarioFormatado">
+                                        <Binding.StringFormat>
+                                            Período: {0}
+                                        </Binding.StringFormat>
+                                    </Binding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                        <!--Chama i evento do grid selecteChanged-->
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer  />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </ScrollView>
+        
+        <!--Botão Adicionar Alunos-->
+        <Button x:Name="btnAdicionar" Text="+" WidthRequest="50" HeightRequest="50" CornerRadius="30" BackgroundColor="DarkCyan" FontAttributes="Bold"
+                    AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.95,0.95,40,40" FontSize="20"
+                    Clicked="btnAdicionar_Clicked"/>
+        
+            <!--Barra deProgresso-->
+        <ActivityIndicator IsRunning="{Binding objMatricula.IsRefreshing}" x:Name="barraProgresso" Color="DarkCyan"     
+              AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,100" />
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -3,7 +3,6 @@ using MauiAppCursoProgramacao.Model;
 using MauiAppCursoProgramacao.ModelView;
 using MauiAppPeriodoProgramacao.ModelView;
 using MauiAppProfessorProgramacao.ModelView;
-using Microsoft.Maui.Platform;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -14,6 +13,8 @@ public partial class MatriculaView : ContentPage
     //Extends appXaml
     string urlBase = App.Current.Resources["urlBase"].ToString();
     string token = App.Current.Resources["token"].ToString();
+    string rotaApi = App.Current.Resources["urlMatricula"].ToString();
+
     string rotaApiAluno = App.Current.Resources["urlAluno"].ToString();
     string rotaApiCurso = App.Current.Resources["urlCurso"].ToString();
     string rotaApiPeriodo = App.Current.Resources["urlPeriodo"].ToString();
@@ -223,26 +224,44 @@ public partial class MatriculaView : ContentPage
 
     private async void btnSalvar_Clicked(object sender, EventArgs e)
     {
-        bool camposValidos = await metodoValidaCadastroAsync();
-
-        if (camposValidos == true)
+        try
         {
-            // Success
-            bool resposta = await DisplayAlert("Matricular Alunos", "Deseja realmenter realizar a matrícula?", "Sim", "Não");
+            bool camposValidos = await metodoValidaCadastroAsync();
 
-            if (resposta == true)
+            if (camposValidos == true)
             {
-                //Criando objeto Matricula
-                objMartricula.matricula.curso = objCurso.Curso;
-                objMartricula.matricula.periodo = objPerido.Periodo;
-                objMartricula.matricula.professor = objProfessor.Professor;
-                objMartricula.matricula.diaSemana = objMartricula.matricula.diaSemana;
+                // Success
+                bool resposta = await DisplayAlert("Matricular Alunos", "Deseja realmenter realizar a matrícula?", "Sim", "Não");
 
-                objMartricula.matricula.listaAlunos = objAluno.ListaAluno;
+                if (resposta == true)
+                {
+                    btnSalvar.IsVisible = false;
+                    barraProgresso.IsRunning = true;
+                    //Criando objeto Matricula
+                    objMartricula.matricula.curso = objCurso.Curso;
+                    objMartricula.matricula.periodo = objPerido.Periodo;
+                    objMartricula.matricula.professor = objProfessor.Professor;
+                    objMartricula.matricula.diaSemana = objMartricula.matricula.diaSemana;
+                    objMartricula.matricula.statusCurso = "Ativo";
 
-                //Utilização do API para realizar matricula
+                    objMartricula.matricula.listaAlunos = objAluno.ListaAluno;
+           
+                    int result = await ClientHttp.Adicionar(urlBase, rotaApi + "/AdicionarMatricula", objMartricula.matricula, token);
+                   
+                    if (result == 1)
+                    {
+                        await DisplayAlert("Sucesso", "Matrícula realizada com sucesso!", "Ok");
+                        await Navigation.PopAsync();
+                    }
+                    else {
+
+                        await DisplayAlert("Erro", "Não foi possível realizar a matrícula!", "Ok");
+                    }
+                    barraProgresso.IsRunning = false;
+                    btnSalvar.IsVisible = true;
+                }
             }
-        }
+        }catch (Exception ex) { await DisplayAlert("Erro", ex.Message,"Ok"); }
     }
 
 

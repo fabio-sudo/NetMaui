@@ -71,7 +71,7 @@ namespace MauiAppCursoProgramacao.Generico
         }
 
         public static async Task<int> BuscarId(
-      string urlbase, string rotaApi, string token = "")
+        string urlbase, string rotaApi, string token = "")
         {
             try
             {
@@ -149,7 +149,10 @@ namespace MauiAppCursoProgramacao.Generico
                 }
 
             }
-            catch (Exception ex) { return 0; }
+            catch (Exception ex) { 
+                
+                throw new Exception(ex.Message);
+                return 0; }
         }
 
         //Método adiciona ou altera objeto via Http
@@ -252,14 +255,38 @@ namespace MauiAppCursoProgramacao.Generico
         }
 
 
+        //Buscar ordem utilizando API + Local + Classe  Client -> para burlar https
+        //modelo utilizado para teste
+        public async Task<int> AdicionarMatricula<T>(string urlbase, string rotaApi, T obj, string token = "")
+        {
+            try
+            {
+                client.BaseAddress = new Uri(urlbase);
 
+                if (token != "") client.DefaultRequestHeaders.Add("token", token);
 
+                var retorno = await client.PostAsJsonAsync<T>(rotaApi, obj);
 
+                if (retorno.IsSuccessStatusCode)
+                {
+                    string escreva = await retorno.Content.ReadAsStringAsync();
+                    return int.Parse(escreva);
 
+                }
+                else
+                {
 
+                    return 0;
 
+                }
 
+            }
+            catch (Exception ex)
+            {
 
-
+                throw new Exception(ex.Message);
+                return 0;
+            }
+        }
     }
 }

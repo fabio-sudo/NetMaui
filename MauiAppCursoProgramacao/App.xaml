@@ -3,11 +3,13 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MauiAppCursoProgramacao"
+             xmlns:custom="clr-namespace:MauiAppCursoProgramacao.Conversor"
              x:Class="MauiAppCursoProgramacao.App">
 
     <Application.Resources>
         <ResourceDictionary>
-            <x:String x:Key="urlBase">https://a182-45-172-144-32.ngrok-free.app</x:String>
+            <custom:ConvertToImageSource x:Key="ArrayByteToImageSource" />
+            <x:String x:Key="urlBase">https://888b-45-172-144-32.ngrok-free.app</x:String>
             <x:String x:Key="token">TexteTokenProjeto2023API</x:String>
             <x:String x:Key="urlLogin" >/api/Login</x:String>
             <x:String x:Key="urlAluno" >/api/Aluno</x:String>
@@ -15,7 +17,7 @@
             <x:String x:Key="urlCurso" >/api/Curso</x:String>
             <x:String x:Key="urlPeriodo" >/api/Periodo</x:String>
             <x:String x:Key="urlProfessor" >/api/Professor</x:String>
-            <x:String x:Key="urlAlunoCurso" >/api/Aluno_Curso</x:String>
+            <x:String x:Key="urlMatricula" >/api/Matricula</x:String>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
