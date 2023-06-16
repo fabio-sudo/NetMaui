@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCursoProgramacao.View.MatriculaAlunoView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="MatriculaAlunoView">
+             Title="Matrícula">
     <!--Imagem -->
     <StackLayout Padding="30">
         <Image x:Name="imgAluno" Source="{Binding objAluno.Aluno.imgStr}" WidthRequest="200" Aspect="AspectFill" 

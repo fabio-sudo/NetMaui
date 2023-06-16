@@ -10,12 +10,14 @@ public partial class App : Application
 
 
 
-        MainPage = new MatriculaMenuView();
+   
+   
+   MainPage = new MatriculaMenuView();
     }
        // MainPage = new AppShell();
 
 
-      /*   if (Preferences.Get("logado", false) == true)
+       /* if (Preferences.Get("logado", false) == true)
           {
               MainPage = new MenuPrincipalView();
           }

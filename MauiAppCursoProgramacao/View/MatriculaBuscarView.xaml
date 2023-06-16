@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCursoProgramacao.View.MatriculaBuscarView"
-             Title="Matrículas">
+             Title="Buscar Alunos Matrícula">
 
     <ContentPage.Resources>
         <!-- Add more resources here -->

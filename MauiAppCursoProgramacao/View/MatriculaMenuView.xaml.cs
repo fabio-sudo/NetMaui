@@ -73,9 +73,49 @@ public partial class MatriculaMenuView : ContentPage
 
     private  async void btnAdicionar_Clicked(object sender, EventArgs e)
     {
-        MatriculaView matriculaAdd = new MatriculaView();//(null, "Cadastro"); // Instancie a página do formulário
-                                                         //await Navigation.PushAsync(matriculaAdd);
+        MatriculaView matriculaAdd = new MatriculaView("Cadastrar",0);//(null, "Cadastro"); // Instancie a página do formulário
+                                                                     //await Navigation.PushAsync(matriculaAdd);
         await Navigation.PushModalAsync(matriculaAdd);
 
+    }
+
+    //Selecionar item
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        var frame = (Frame)sender;
+        var item = frame.BindingContext;
+
+        lstListaMatriculas.SelectedItem = item; // Simula a seleção do item no CollectionView
+    }
+
+    private async void lstListaMatriculas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // Verifique se algum item foi selecionado
+        if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+        {
+            // Obtenha o aluno selecionado
+            MatriculaModel matriculaSelecionada = e.CurrentSelection[0] as MatriculaModel;
+
+            string acaoSelecionada = await Application.Current.MainPage.DisplayActionSheet("Opções", "Cancelar", null, "Alterar", "Excluir");
+
+            // Verifique a ação selecionada
+            if (acaoSelecionada == "Excluir")
+            {
+                MatriculaView _matricula = new MatriculaView("Excluir",matriculaSelecionada.ordemMatricula); // Instancie a página do formulário
+                await Navigation.PushModalAsync(_matricula);
+
+                //metodoAtulizaFormulario(alunoAdd);
+            }
+            else if (acaoSelecionada == "Alterar")
+            {
+                MatriculaView _matricula = new MatriculaView("Alterar", matriculaSelecionada.ordemMatricula); // Instancie a página do formulário
+                await Navigation.PushModalAsync(_matricula);
+
+                //metodoAtulizaFormulario(alunoAdd);
+            }
+        }
+
+    // Limpe a seleção para evitar que o evento seja acionado novamente acidentalmente
+    ((CollectionView)sender).SelectedItem = null;
     }
 }

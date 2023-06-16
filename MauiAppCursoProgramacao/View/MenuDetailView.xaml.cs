@@ -67,6 +67,11 @@ public partial class MenuDetailView : ContentPage
                     _ = App.Navegacao.PushAsync(new AlunoBuscarView());
 
                 }
+                else if (selectedItem.nomeDescricao == "Matrícula")
+                {
+                    _ = App.Navegacao.PushAsync(new MatriculaMenuView());
+
+                }
                 else if (selectedItem.nomeDescricao == "Sair")
                 {
                     string usuarioLogado = Preferences.Get("usuarioLogado", "");

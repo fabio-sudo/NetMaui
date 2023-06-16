@@ -3015,6 +3015,13 @@ C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\compressed_assemblies.x86_64.o
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\jni_remap.x86_64.o
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\app_shared_libraries\x86_64\libxamarin-app.so
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\cabelereiro_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\costura_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\cozinha_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\depilacao_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\informatica_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\maquiagem_icone.png
+C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\programacao_icone.png
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\mscorlib.dll
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\System.Collections.Concurrent.dll
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\System.Data.Common.dll
@@ -3028,10 +3035,3 @@ C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\System.Runtime.Extensions.dll
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\System.Runtime.Serialization.Formatters.dll
 C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\android\assets\System.Xml.dll
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\cabelereiro_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\costura_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\cozinha_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\depilacao_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\informatica_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\maquiagem_icone.png
-C:\Users\Admin\Desktop\MauiAppCursoProgramacao\MauiAppCursoProgramacao\obj\Debug\net7.0-android\resizetizer\r\drawable\programacao_icone.png

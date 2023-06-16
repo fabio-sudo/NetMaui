@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppCursoProgramacao.View.MatriculaMenuView"
-             Title="MatriculaMenuView">
+             Title="Matrículas Cursos">
     
     <!-- Paineis de Seleção de Matriculas --> 
         <ContentPage.Resources>
@@ -13,15 +13,47 @@
 
 
     <AbsoluteLayout>
-        <!--Filtro Curso-->
-        <!--Filtro Período-->
-        <!--Filtro Dia Semana-->
+        <!--Filtros-->
+        <Grid HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <!--Curso-->
+            <Label Text="Curso:" Grid.Column="0" Margin="15,3" TextColor="DarkCyan" FontSize="Body" FontAttributes="Bold"/>
+            <Picker x:Name="picCurso" Style="{StaticResource PickerStyle}" FontAttributes="Bold"
+            Margin="15,15" TextColor="Gray" FontSize="Body" Grid.Column="0" TitleColor="Gray"
+            Title="Selecione o Curso"
+            ItemsSource="{Binding objCurso.ListaCurso}"
+            SelectedItem="{Binding IdCurso}"                         
+            ItemDisplayBinding="{Binding NomeCurso}"/>
+            
+            <!-- Dia Semana -->
+            <Label Text="Dia da Semana:" Grid.Column="1" Margin="5,3" TextColor="DarkCyan" FontSize="Body" FontAttributes="Bold"/>
+            <Picker x:Name="picDiaSemana" Style="{StaticResource PickerStyle}" FontAttributes="Bold" TitleColor="Gray"
+            Title="Selecione o Dia da Semana" Margin="5,15" TextColor="Gray" FontSize="Body" Grid.Column="1">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Todos</x:String>
+                        <x:String>Segunda-Feira</x:String>
+                        <x:String>Terça-Feira</x:String>
+                        <x:String>Quarta-Feira</x:String>
+                        <x:String>Quinta-Feira</x:String>
+                        <x:String>Sexta-Feira</x:String>
+                        <x:String>Sábado</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
+        </Grid>
+        
+        
         <!--Lista de Alunos-->
         <ScrollView
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" Margin="10,80,10,10">
             
-        <CollectionView x:Name="lstListaMatriculas" SelectionMode="Single"
+        <CollectionView x:Name="lstListaMatriculas" SelectionMode="Single" SelectionChanged="lstListaMatriculas_SelectionChanged"
                  ItemsSource="{Binding objMatricula.ListaMatricula}" >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -69,7 +101,7 @@
                         </Grid>
                         <!--Chama i evento do grid selecteChanged-->
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer  />
+                            <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped"/>
                         </Frame.GestureRecognizers>
                     </Frame>
                 </DataTemplate>

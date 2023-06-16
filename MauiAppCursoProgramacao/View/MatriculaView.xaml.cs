@@ -10,12 +10,16 @@ namespace MauiAppCursoProgramacao.View;
 
 public partial class MatriculaView : ContentPage
 {
+    //Construtor
+    int ordemMatricula = 0;
+    string tipoPage = "";
+
     //Extends appXaml
     string urlBase = App.Current.Resources["urlBase"].ToString();
     string token = App.Current.Resources["token"].ToString();
     string rotaApi = App.Current.Resources["urlMatricula"].ToString();
 
-    string rotaApiAluno = App.Current.Resources["urlAluno"].ToString();
+    //string rotaApiAluno = App.Current.Resources["urlAluno"].ToString();
     string rotaApiCurso = App.Current.Resources["urlCurso"].ToString();
     string rotaApiPeriodo = App.Current.Resources["urlPeriodo"].ToString();
     string rotaApiProfessor = App.Current.Resources["urlProfessor"].ToString();
@@ -25,10 +29,16 @@ public partial class MatriculaView : ContentPage
     public CursoModelView objCurso { get; set; }
     public PeriodoModelView objPerido { get; set; }
     public ProfessorModelView objProfessor { get; set; }
-    public MatriculaView()
+    public MatriculaView(string tipoPageSelecionada, int ordem)
     {
+        //Passar o objeto matricula em vez de somente a ordem selecionada
+        //Para realizar as devidas atualizações ou exclusões
 
         InitializeComponent();
+
+        //Pagina Genérica
+        tipoPage = tipoPageSelecionada;
+        ordemMatricula = ordem;
 
         objMartricula = new MatriculaModelView();
         objMartricula.matricula = new MatriculaModel();
@@ -58,6 +68,32 @@ public partial class MatriculaView : ContentPage
 
     }
 
+
+    private async void metodoConstrutor() {
+
+        try
+        {
+            if (tipoPage.Equals("Cadastro"))
+            {
+
+
+            }
+            else if (tipoPage.Equals("Alterar"))
+            {
+
+                objMartricula.matricula.listaAlunos = await ClientHttp.BuscarLista<AlunoModel>(urlBase, rotaApi + "/BuscarMatriculaAlunos?ordemMatricula=" + ordemMatricula, token);
+                objAluno.ListaAluno = new List<AlunoModel>(objMartricula.matricula.listaAlunos);
+
+            }
+            else if (tipoPage.Equals("Excluir"))
+            {
+
+
+
+            }
+        }catch (Exception ex) { throw new Exception(ex.Message); }
+    }
+
     //Gera listas para preencher os combobox
     private async void metodoGeraListas() {
         try
@@ -72,6 +108,8 @@ public partial class MatriculaView : ContentPage
 
             objProfessor.ListaProfessor =
             await ClientHttp.BuscarLista<ProfessorModel>(urlBase, rotaApiProfessor, token);
+
+            metodoConstrutor();
 
         }
         catch (Exception ex) { await DisplayAlert("Erro", ex.Message, "OK"); }
