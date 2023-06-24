@@ -122,7 +122,7 @@
                                 </ImageButton.Source>
                             </ImageButton>
 
-                            <Label Grid.Column="0" Grid.Row="0" FontAttributes="Bold" FontSize="15" Margin="0,0,0,10">
+                            <Label Grid.Column="0" Grid.Row="0" FontAttributes="Bold" FontSize="15" Margin="0,0,0,10" TextColor="Black">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="NomeAluno" />
@@ -160,9 +160,16 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Salvar" Style="{StaticResource ButtonStyle}" x:Name="btnSalvar" Clicked="btnSalvar_Clicked"/>
-        <!--Barra deProgresso-->
-        <ActivityIndicator IsRunning="False" x:Name="barraProgresso" Color="DarkCyan" />
 
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Button Text="Salvar"  x:Name="btnSalvar" Clicked="btnSalvar_Clicked"
+            Margin="5,10,0,0" WidthRequest="220" Style="{StaticResource ButtonStyle}"  />
+
+            <Button Text="Voltar"  x:Name="btnVoltar"
+            Margin="5,10,0,0" Clicked="btnVoltar_Clicked" WidthRequest="150" Style="{StaticResource ButtonStyle}"/>
+        </HorizontalStackLayout>
+        
+        <!--Barra de Progresso-->
+        <ActivityIndicator IsRunning="False" x:Name="barraProgresso" Color="DarkCyan" />
     </StackLayout>
 </ContentPage>

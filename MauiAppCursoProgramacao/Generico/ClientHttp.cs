@@ -230,6 +230,8 @@ namespace MauiAppCursoProgramacao.Generico
             try
             {
                 var cliente = new HttpClient();
+
+
                 cliente.BaseAddress = new Uri(urlbase);
 
                 if (token != "")
@@ -256,7 +258,7 @@ namespace MauiAppCursoProgramacao.Generico
 
 
         //Buscar ordem utilizando API + Local + Classe  Client -> para burlar https
-        //modelo utilizado para teste
+        //------------------------------Teste API LOCAL
         public async Task<int> AdicionarMatricula<T>(string urlbase, string rotaApi, T obj, string token = "")
         {
             try
@@ -288,5 +290,38 @@ namespace MauiAppCursoProgramacao.Generico
                 return 0;
             }
         }
+
+        public async Task<Boolean> AlterarMatricula<T>(string urlbase, string rotaApi, T obj, string token = "")
+        {
+            try
+            {
+                var cliente = new HttpClient();
+
+
+
+                client.BaseAddress = new Uri(urlbase);
+
+                if (token != "")
+                {
+                    client.DefaultRequestHeaders.Add("token", token);
+                }
+
+                var retorno = await client.PutAsJsonAsync<T>(rotaApi, obj);
+
+                if (retorno.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

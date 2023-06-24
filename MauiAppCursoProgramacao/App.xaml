@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <custom:ConvertToImageSource x:Key="ArrayByteToImageSource" />
-            <x:String x:Key="urlBase">https://e47e-45-172-144-32.ngrok-free.app</x:String>
+            <x:String x:Key="urlBase">https://56d4-45-172-144-32.ngrok-free.app</x:String>
             <x:String x:Key="token">TexteTokenProjeto2023API</x:String>
             <x:String x:Key="urlLogin" >/api/Login</x:String>
             <x:String x:Key="urlAluno" >/api/Aluno</x:String>
